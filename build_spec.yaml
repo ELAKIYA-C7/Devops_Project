@@ -1,0 +1,26 @@
+version: 0.1
+
+component: build
+
+timeoutInSeconds: 600
+
+shell: bash
+
+steps:
+
+  - type: Command
+    name: "Install dependencies"
+    command: |
+      pip install -r requirements.txt
+
+  - type: Command
+    name: "Run application test"
+    command: |
+      python app.py &
+      sleep 5
+      curl http://localhost:5000
+
+artifacts:
+  - name: devops-artifact
+    type: BINARY
+    location: .
