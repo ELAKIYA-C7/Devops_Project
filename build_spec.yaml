@@ -6,18 +6,24 @@ timeoutInSeconds: 10000
 
 shell: bash
 
+env:
+  variables:
+    REGION: "ap-hyderabad-1"
+    NAMESPACE: "axzwgv6a1ovg"
+    REPO: "flask-app-repo"
+
 steps:
   - type: Command
-    name: Install Docker
+    name: Login to OCIR
     command: |
-      yum install -y docker
+      echo "wIe}_i_iA8SSWPA<296Y" | docker login ap-hyderabad-1.ocir.io -u "axzwgv6a1ovg/elakiya.c_it27@gcee.ac.in" --password-stdin
 
   - type: Command
     name: Build Image
     command: |
-      docker build -t flask-app .
+      docker build -t ap-hyderabad-1.ocir.io/axzwgv6a1ovg/flask-app-repo:latest .
 
   - type: Command
-    name: Show Images
+    name: Push Image
     command: |
-      docker images
+      docker push ap-hyderabad-1.ocir.io/axzwgv6a1ovg/flask-app-repo:latest
