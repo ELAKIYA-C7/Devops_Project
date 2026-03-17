@@ -2,25 +2,27 @@ version: 0.1
 
 component: build
 
-timeoutInSeconds: 600
+timeoutInSeconds: 10000
 
 shell: bash
 
 steps:
+  - type: Command
+    name: Install Docker
+    command: |
+      yum install -y docker
 
   - type: Command
-    name: "Install dependencies"
+    name: Start Docker
     command: |
-      pip install -r requirements.txt
+      service docker start
 
   - type: Command
-    name: "Run application test"
+    name: Build Image
     command: |
-      python app.py &
-      sleep 5
-      curl http://localhost:5000
+      docker build -t flask-app .
 
-artifacts:
-  - name: devops-artifact
-    type: BINARY
-    location: .
+  - type: Command
+    name: Show Images
+    command: |
+      docker images
