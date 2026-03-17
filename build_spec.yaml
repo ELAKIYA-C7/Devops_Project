@@ -13,11 +13,6 @@ steps:
       yum install -y docker
 
   - type: Command
-    name: Start Docker
-    command: |
-      service docker start
-
-  - type: Command
     name: Build Image
     command: |
       docker build -t flask-app .
